@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "logger": "^0.0.1",
+    "mongoose": "^4.8.1",
+    "morgan": "^1.8.0",
+    "sentiment": "^2.1.0",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0"
+  }
+}
