@@ -1,4 +1,4 @@
-module.exports.symbols = [
+module.exports.nasdaq = [
   {
     "Symbol": "AAAP",
     "Description": "Advanced Accele. Ads"
@@ -12696,3 +12696,4 @@ module.exports.symbols = [
     "Description": "Zynerba Pharma CS"
   }
 ]
+
