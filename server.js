@@ -40,54 +40,47 @@ function analyzeSentiment(tweet) {
   });
 };
 
-// function isTraded(tweet) {
-//   let twee = tweet.trim().toUpperCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ").split(' ')
 
-//   // let twee = r.
-
-
-
-//   for (var i=0; i < sorted.length; i++) {
-//     for (var j=0; j < twee.length; j++) {
-//       sorted[i]["Description"].split(' ').map(function(x) {
-//         if (x.toUpperCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ") === twee[j]) {
-//           console.log(twee[j], sorted[i])
-//         }
-//       })
-//     }
-//   };
-// };
+function isExact(x,y) {
+  let s = x.split(' ');
+  for (var i = 0; i < s.length; i++) {
+    return s[i] == y;
+  };
+};
 
 function isTraded(tweet) {
-  let twee = tweet.trim().toUpperCase().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ").split(' ');
+  
+  let sanitized = tweet.trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ")
+  let twee = nlp(sanitized).nouns().out('text').trim().toUpperCase().split(' ');
+
+  let twee1 = tweet.trim().toUpperCase().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ").split(' ');
+  console.log('twee ', twee)
+  console.log('twee1 ', twee1)
+
   let match = [];
   for (var i = 0; i < twee.length; i++) {
-     match.push(sorted
-     .filter(x => x["Description"]
-     .toUpperCase()
-     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
-     .replace(/\s{2,}/g," ")
-     .indexOf(twee[i]) > -1));
-  }
-  console.log(match)
+    let temp = sorted
+      .filter(x => isExact(x["Description"]
+      .toUpperCase()
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+      .replace(/\s{2,}/g," ")
+      , twee[i]
+      ))
+      
+    if (temp.length !== 0) {
+      match.push(temp)
+    };
+
+  };
+
+console.log(match)
 
 }
-isTraded('@Nordstrom')
+
+
+isTraded('the opera about richard nixon visiting nordstrom')
 // doesn't return if 2 things are listed, bc map is combining into indexof
-// function faster(tweet) {
-  
-//   let twee = tweet.trim().toUpperCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ").split(' ').filter(function(x) { return nlp.noun(x) });
 
-
-//     for (var j=0; j < twee.length; j++) {
-//       sorted.map(function(x, i) {
-//         if (x.split(' ').toUpperCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ") === twee[j]) {
-//           console.log(twee[j], sorted[i])
-//         }
-//       })
-//     }
-
-// };
 // sort by frequncy
 
 
