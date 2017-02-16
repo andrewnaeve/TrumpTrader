@@ -34,8 +34,8 @@ app.listen(port, function() {
 
 // })
 
-function analyzeSentiment(tweet) {
-  let result = sentiment(tweet, {
+function getSentiment(tweet) {
+  return result = sentiment(tweet, {
     'mexico': -5
   });
 };
@@ -72,13 +72,23 @@ function isTraded(tweet) {
     };
 
   };
+  return match;
 
-console.log(match)
+
 
 }
 
 
-isTraded('the opera about richard nixon visiting nordstrom')
+var tweet = 'I hate nordstrom, they are moving to Mexico.'
+let p1 = getSentiment(tweet)
+let p2 = isTraded(tweet)
+
+function test() {
+  Promise.all([p1, p2]).then(values => {
+    console.log('Promise Values', values[0].score, values[1])
+  })
+}
+test();
 // doesn't return if 2 things are listed, bc map is combining into indexof
 
 // sort by frequncy
