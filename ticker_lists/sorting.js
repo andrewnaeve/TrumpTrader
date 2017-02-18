@@ -1,9 +1,12 @@
-fs.appendFile("sorted.txt", sort(), function(error) {
+var sorted = require('./sorted').sorted
+var fs = require('fs')
+
+fs.appendFile("sanitized.txt", sort(), function(error) {
   if(error) {
     console.log(error);
   }
 });
 
 function sort() {
-  return  JSON.stringify(nasdaq.concat(nyse).sort())
+  return  Object.values(sorted, i)[i].replace(/[.,\/#!@$%\^&\*;=\-_`~]/g,"").replace(/\s{2,}/g," ")
 }      
