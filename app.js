@@ -42,7 +42,7 @@ function getSentiment(tweet) {
 };
 
 
-var tweet = 'the Company is great';
+// var tweet = 'the General Motors is great';
 
 function isTraded(tweet) {
   
@@ -50,33 +50,28 @@ function isTraded(tweet) {
   let longest = longestPhrase(tweets)
 
   let narrow = sorted.filter(x => x["Description"].includes(longest) && longest.length / x["Description"].length > .4)
-  let hi = narrow.sort((a,b) => (longest.length / b["Description"].length) - (longest.length / a["Description"].length))
+  .sort((a,b) => (longest.length / b["Description"].length) - (longest.length / a["Description"].length))
+  
   // sorting makes it more relevant, but if multiple matches, do you really wanna?
-  console.log(hi)
+  return narrow
 
-  if (narrow.length > 1) {
-    for (var i = 0; i < narrow.length; i++) {
-      for (var k = 1; k < narrow.lengh -i; k++) {
-
-      }
-    }
-  }
 
   // also toss out
   // console.log(narrow)
   
 }
 
-isTraded(tweet);
+// isTraded(tweet);
 
-// // var tweet = 'Ford Motor Company'
-// // let p1 = getSentiment(tweet)
-// let p2 = isTraded(tweet)
+var tweet = 'the General Motors is great'
+let p1 = getSentiment(tweet)
+let p2 = isTraded(tweet)
 
-// function test() {
-//   Promise.all([p1, p2]).then(values => {
-//     console.log('Promise Values', values[0].score, values[1])
-//   })
-// }
+function test() {
+  Promise.all([p1, p2]).then(values => {
+    console.log('Promise Values', values[0].score, values[1][0]["Symbol"])
+  })
+}
 
 
+test()
