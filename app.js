@@ -4,12 +4,17 @@ const logger = require('morgan');
 const twitter = require('twitter');
 const client = require('./secrets/twitter_keys').twit;
 const sentiment = require('sentiment');
+
+// stock lists
 const nasdaq = require('./ticker_lists/nasdaq').nasdaq;
 const nyse = require('./ticker_lists/nyse').nyse;
 const sorted = require('./ticker_lists/sorted').sorted;
-const nlp = require('compromise');
-const longestPhrase = require('./algorithms').longestPhrase;
 
+// functions and algorithms
+const longestPhrase = require('./algorithms').longestPhrase;
+const getSentiment = require('./algorithms').getSentiment;
+
+// server setup
 // const express = require('express')
 // const app = express();
 // const port = 3000;
@@ -35,11 +40,10 @@ const longestPhrase = require('./algorithms').longestPhrase;
 
 // })
 
-function getSentiment(tweet) {
-  return result = sentiment(tweet, {
-    'mexico': -5
-  });
-};
+
+
+
+
 
 
 // var tweet = 'the General Motors is great';
@@ -49,15 +53,12 @@ function isTraded(tweet) {
   let tweets = tweet.trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
   let longest = longestPhrase(tweets)
 
-  let narrow = sorted.filter(x => x["Description"].includes(longest) && longest.length / x["Description"].length > .4)
+  let narrow = sorted.filter(x => x["Description"].includes(longest) && longest.length / x["Description"].length > .34)
   .sort((a,b) => (longest.length / b["Description"].length) - (longest.length / a["Description"].length))
   
   // sorting makes it more relevant, but if multiple matches, do you really wanna?
   return narrow
 
-
-  // also toss out
-  // console.log(narrow)
   
 }
 
@@ -73,5 +74,7 @@ function test() {
   })
 }
 
-
 test()
+
+
+

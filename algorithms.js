@@ -1,4 +1,5 @@
 const sorted = require('./ticker_lists/sorted').sorted;
+const sentiment = require('sentiment');
 
 module.exports.longestPhrase = function(twee) {
   
@@ -16,14 +17,17 @@ module.exports.longestPhrase = function(twee) {
           } else {
             consec.push(t)
             break;
-          }
-        }
-      }
-    }
-  }
+          };
+        };
+      };
+    };
+  };
   if (consec.length > 0) {return(consec.reduce((a,b) => a.length > b.length ? a : b))}
   else {return ''}
-}
+};
 
-
-
+module.exports.getSentiment = function(tweet) {
+  return result = sentiment(tweet, {
+    'mexico': -5
+  });
+};
