@@ -1,34 +1,29 @@
-module.exports.longestPhrase = function(x, y) {
-  
-  let tweet = y.split(' ');
-  let stocks = x;
-  let final = [];
+const sorted = require('./ticker_lists/sorted').sorted;
 
-  for (var p = 0; p < stocks.length; p++) {
-    let semiFinal = [];
-    let companyString = stocks[p]["Description"].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
+module.exports.longestPhrase = function(twee) {
+  
+  let tweet = twee.split(' ');
+  let consec = [];
+
+  for(var k = 0; k < sorted.length; k++) {
+    let companyString = sorted[k]["Description"];
     for (var i=0; i < tweet.length; i++) {
-      let matches = [];
-      if (companyString.includes(tweet[i])) {
-        matches.push(tweet[i]);
+      if (companyString.includes(tweet[i]) && tweet[i][0] === tweet[i][0].toUpperCase()) {
+        var t = tweet[i];
         for (var j=i+1; j < tweet.length; j++) {
-          if (companyString.includes(String(matches) + ' ' + tweet[j])) {
-            matches.push(tweet[j]);
+          if (companyString.includes(t + ' ' + tweet[j])) {
+            t += ' ' + tweet[j];
+          } else {
+            consec.push(t)
+            break;
           }
         }
-      if(matches.length !== 0) { semiFinal.push(matches.join(' ')) }
       }
     }
-
-    if (semiFinal.length !== 0) { final.push(semiFinal); }
-  // at the end, semiFinal contains the best matched phrase
-  // for the single stocks
+  }
+  if (consec.length > 0) {return(consec.reduce((a,b) => a.length > b.length ? a : b))}
+  else {return ''}
 }
 
-   console.log(final.reduce((a,b) => a.length > b.length ? a : b));
-  // now final contains the longest of all matches
-}
 
-module.exports.narrowMatches = function(x, y) {
 
-}
