@@ -12,8 +12,8 @@ exports.isTraded = function(tweet) {
   let longest = longestPhrase(tweets);
   let Symbol = findSymbol(longest);
 
-  console.log(longest)
-  console.log(Symbol)
+  console.log('longest', longest)
+  console.log('symbol', Symbol)
 
   if (Symbol.length > 0) { return Symbol[0]["Symbol"] }
   else { return "Error 1" }

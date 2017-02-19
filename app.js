@@ -13,7 +13,7 @@ const sorted = require('./ticker_lists/sorted').sorted;
 // functions and algorithms
 const longestPhrase = require('./algorithms').longestPhrase;
 const getSentiment = require('./algorithms').getSentiment;
-
+const findSymbol = require('./algorithms').findSymbol;
 const isTraded = require('./functions').isTraded;
 
 // server setup
@@ -48,11 +48,11 @@ const isTraded = require('./functions').isTraded;
 
 
 
-var tweet = 'Boeing';
+var tweet = "Boeing is building a brand new 747 Air Force One for future presidents, but costs are out of control, more than $4 billion. Cancel order!";
 
 
 
-console.log(longestPhrase(tweet));
+console.log(findSymbol('Boeing'));
 
 
 
