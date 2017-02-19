@@ -25,7 +25,8 @@ exports.getSentiment = function(tweet) {
   return result = sentiment(tweet, {
     'mexico': -5,
     'mexican': -5,
-    'big': -2
+    'big': -2,
+    'costs': -3
   });
 },
 

@@ -1,5 +1,5 @@
 const sorted = require('./ticker_lists/sorted').sorted;
-const sentiment = require('sentiment');
+
 
 module.exports.longestPhrase = function(twee) {
   
