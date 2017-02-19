@@ -1,14 +1,36 @@
+const expect = require('chai').expect;
+
 const targetedTweets = require('./targeted_tweets').targetedTweets;
 const getSentiment = require('../algorithms').getSentiment;
 const longestPhrase = require('../algorithms').longestPhrase;
+const findSymbol = require('../algorithms').findSymbol;
+const isTraded = require('../functions').isTraded;
 
 
-var tweet = 'the General Motors is great'
-let p1 = getSentiment(tweet)
-let p2 = isTraded(tweet)
+describe('functions', function () {
+  let traded = isTraded("General Motors is sending Mexican made model of Chevy Cruze to U.S. car dealers-tax free across border. Make in U.S.A.or pay big border tax!");
+  it('should find the correct stock symbol', function() {
+    expect(traded).to.deep.equal('GM');
+  });
+});
 
-function test() {
-  Promise.all([p1, p2]).then(values => {
-    console.log('Promise Values', values[0].score, values[1][0]["Symbol"])
-  })
-}
+describe('functions', function () {
+  let traded = isTraded("Rexnord of Indiana is moving to Mexico and rather viciously firing all of its 300 workers. This is happening all over our country. No more!");
+  it('should find the correct stock symbol', function() {
+    expect(traded).to.deep.equal('RXN');
+  });
+});
+
+describe('functions', function () {
+  let traded = isTraded("Boeing is building a brand new 747 Air Force One for future presidents, but costs are out of control, more than $4 billion. Cancel order!");
+  it('should find the correct stock symbol', function() {
+    expect(traded).to.deep.equal('BA');
+  });
+});
+
+describe('functions', function () {
+  let traded = isTraded("Toyota Motor said will build a new plant in Baja, Mexico, to build Corolla cars for U.S. NO WAY! Build plant in U.S. or pay big border tax.");
+  it('should find the correct stock symbol', function() {
+    expect(traded).to.deep.equal('TM');
+  });
+});
