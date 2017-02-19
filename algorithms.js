@@ -11,7 +11,9 @@ module.exports.longestPhrase = function(twee) {
     for (var i=0; i < tweet.length; i++) {
       if (companyString.includes(tweet[i]) && tweet[i][0] === tweet[i][0].toUpperCase()) {
         var t = tweet[i];
+        consec.push(t);
         if(tweet[i+1] !== undefined) {
+          console.log('ting')
           for (var j=i+1; j < tweet.length; j++) {
             if (companyString.includes(t + ' ' + tweet[j])) {
               t += ' ' + tweet[j];
@@ -21,9 +23,7 @@ module.exports.longestPhrase = function(twee) {
               break;
             };
           };
-        } else {
-          consec.push(t);
-        };
+        }; 
       };
     };
   };

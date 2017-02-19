@@ -15,7 +15,8 @@ exports.isTraded = function(tweet) {
   console.log(longest)
   console.log(Symbol)
 
-  return Symbol[0]["Symbol"];
+  if (Symbol.length > 0) { return Symbol[0]["Symbol"] }
+  else { return "Error 1" }
   // else { return 'Error 1' }
 
 },

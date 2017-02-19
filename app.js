@@ -48,7 +48,7 @@ const isTraded = require('./functions').isTraded;
 
 
 
-var tweet = 'Ford Motor is a super place';
+var tweet = 'Boeing';
 
 
 
