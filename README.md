@@ -6,7 +6,7 @@
 #Technolog used
 <ul>
 <li>Express for the server</li>
-<li>Bluebird for fast asynchronous design</li>
+<li>Bluebird for fast asynchronous programming</li>
 <li>Mocha / Chai for testing</li>
 <li>Sentiment from NPM for sentiment analysis</li>
 </ul>
