@@ -12,16 +12,14 @@ module.exports.longestPhrase = function(twee) {
       if (companyString.includes(tweet[i]) && tweet[i][0] === tweet[i][0].toUpperCase()) {
         var t = tweet[i];
         consec.push(t);
-
-          for (var j=i+1; j < tweet.length-1; j++) {
-            if (companyString.includes(t + ' ' + tweet[j])) {
-              t += ' ' + tweet[j];
-              consec.push(t);
-            } else {
-              break;
-            };
+        for (var j=i+1; j < tweet.length-1; j++) {
+          if (companyString.includes(t + ' ' + tweet[j])) {
+            t += ' ' + tweet[j];
+            consec.push(t);
+          } else {
+            break;
           };
-
+        };
       };
     };
   };

@@ -31,7 +31,7 @@ describe('search algorithm', function () {
 });
 
 describe('search algorithm', function () {
-  let traded = isTraded("asdffdsa");
+  let traded = isTraded("company");
   it('should find the correct stock symbol', function() {
     expect(traded).to.deep.equal('Error 1');
   });

@@ -17,43 +17,28 @@ const findSymbol = require('./algorithms').findSymbol;
 const isTraded = require('./functions').isTraded;
 
 // server setup
-// const express = require('express')
-// const app = express();
-// const port = 3000;
-// app.use('/public', express.static('./public'));
-// app.use(logger('dev'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.text());
-// app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+const express = require('express')
+const app = express();
+const port = 3000;
+app.use('/public', express.static('./public'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
-// app.listen(port, function() {
-//   console.log('listening on ' + port);
-// });
+app.listen(port, function() {
+  console.log('listening on ' + port);
+});
 
 // twitter stream grab
 
-// var params = {with: 'followings'};
+let params = {with: 'followings'};
+let stream = client.stream('user', params );
 
-// var stream = client.stream('user', params );
-// stream.on('data', function(event) {
-
-//   console.log('the tweet: ', event.text)
-
-// })
-
-
-
-
-
-
-
-var tweet = "Boeing is building a brand new 747 Air Force One for future presidents, but costs are out of control, more than $4 billion. Cancel order!";
-
-
-
-console.log(findSymbol('Boeing'));
-
-
-
+stream.on('data', function(event) {
+  let tweet = event.text;
+  console.log('the tweet: ', tweet);
+  isTraded(tweet);
+})
 
