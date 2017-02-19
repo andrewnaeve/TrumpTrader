@@ -11,23 +11,35 @@ module.exports.longestPhrase = function(twee) {
     for (var i=0; i < tweet.length; i++) {
       if (companyString.includes(tweet[i]) && tweet[i][0] === tweet[i][0].toUpperCase()) {
         var t = tweet[i];
-        for (var j=i+1; j < tweet.length; j++) {
-          if (companyString.includes(t + ' ' + tweet[j])) {
-            t += ' ' + tweet[j];
-          } else {
-            consec.push(t)
-            break;
+        if(tweet[i+1] !== undefined) {
+          for (var j=i+1; j < tweet.length; j++) {
+            if (companyString.includes(t + ' ' + tweet[j])) {
+              t += ' ' + tweet[j];
+              consec.push(t);
+              console.log('in loop', t)
+            } else {
+              break;
+            };
           };
+        } else {
+          consec.push(t);
         };
       };
     };
   };
-  if (consec.length > 0) {return(consec.reduce((a,b) => a.length > b.length ? a : b))}
-  else {return ''}
+  console.log(consec)
+  // if (consec.length > 0) {return(consec.reduce((a,b) => a.length > b.length ? a : b))}
+  // else {return 'no matches from longest phrase'}
 };
+// bug = algo checks one after, but fails if one after doesn't exist
 
-module.exports.getSentiment = function(tweet) {
-  return result = sentiment(tweet, {
-    'mexico': -5
-  });
-};
+ module.exports.findSymbol = function(longest) {
+
+  let narrow = sorted.filter(x => x["Description"].includes(longest) && longest.length / x["Description"].length > .30)
+  .sort((a,b) => (longest.length / b["Description"].length) - (longest.length / a["Description"].length))
+  
+  // sorting makes it more relevant, but if multiple matches, do you really wanna?
+  return narrow
+
+}
+  

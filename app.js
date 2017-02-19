@@ -14,6 +14,8 @@ const sorted = require('./ticker_lists/sorted').sorted;
 const longestPhrase = require('./algorithms').longestPhrase;
 const getSentiment = require('./algorithms').getSentiment;
 
+const isTraded = require('./functions').isTraded;
+
 // server setup
 // const express = require('express')
 // const app = express();
@@ -46,35 +48,12 @@ const getSentiment = require('./algorithms').getSentiment;
 
 
 
-// var tweet = 'the General Motors is great';
+var tweet = 'Ford Motor is a super place';
 
-function isTraded(tweet) {
-  
-  let tweets = tweet.trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
-  let longest = longestPhrase(tweets)
 
-  let narrow = sorted.filter(x => x["Description"].includes(longest) && longest.length / x["Description"].length > .34)
-  .sort((a,b) => (longest.length / b["Description"].length) - (longest.length / a["Description"].length))
-  
-  // sorting makes it more relevant, but if multiple matches, do you really wanna?
-  return narrow
 
-  
-}
+console.log(longestPhrase(tweet));
 
-// isTraded(tweet);
-
-var tweet = 'the General Motors is great'
-let p1 = getSentiment(tweet)
-let p2 = isTraded(tweet)
-
-function test() {
-  Promise.all([p1, p2]).then(values => {
-    console.log('Promise Values', values[0].score, values[1][0]["Symbol"])
-  })
-}
-
-test()
 
 
 
