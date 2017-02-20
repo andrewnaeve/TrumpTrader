@@ -1,11 +1,8 @@
 const sorted = require('./ticker_lists/cleaned').sorted;
 const blocked = require('./ticker_lists/blocked').blocked;
-const relevance = .34;
+const relevance = .32;
 // set relevance to return matching phrases that are a certain percentage of the company description
-// what happens when word matches are of equal length?
-// maybe every time a word is matched, the ticker symbol could be added to it.
-// then if reduced, would best match be found? 
-// 
+// possible overal character length more relevant than word chunks
 module.exports.longestPhrase = function(twee) {
   
   let tweet = twee.split(' ');
