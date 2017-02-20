@@ -1,4 +1,5 @@
-const sorted = require('./ticker_lists/sorted').sorted;
+const sorted = require('./ticker_lists/cleaned').sorted;
+const blocked = require('./ticker_lists/blocked').blocked;
 const relevance = .34;
 // set relevance to return matching phrases that are a certain percentage of the company description
 // what happens when word matches are of equal length?
@@ -9,7 +10,6 @@ module.exports.longestPhrase = function(twee) {
   
   let tweet = twee.split(' ');
   let consec = [{Longest: '', Symbol: '', Description: ''}];
-  let collect = [];
 
  for(var k = 0; k < sorted.length; k++) {
     let companyString = sorted[k].Description;
@@ -28,7 +28,7 @@ module.exports.longestPhrase = function(twee) {
       
         let matchObject = { Longest: t, Symbol: sorted[k].Symbol, Description: sorted[k].Description};
 
-        if(consec[0].Longest.length < t.length && (matchObject.Longest.split(' ').length / companyString.split(' ').length) > relevance) {
+        if(consec[0].Longest.length < t.length && (matchObject.Longest.length / companyString.length) > relevance) {
           consec[0] = matchObject;
         } else if (consec[0].Longest.length === t.length) {
           if ((consec[0].Longest.split(' ').length / consec[0].Description.split(' ').length) < (matchObject.Longest.split(' ').length / matchObject.Description.split(' ').length)) {
@@ -39,7 +39,15 @@ module.exports.longestPhrase = function(twee) {
     };
   };
   
-  if (consec.length > 0) { return consec }
+  if (consec.length > 0) {
+    for(var d = 0; d < blocked.length; d++) {
+      let forbidden = new RegExp(blocked[d]);
+      if (forbidden.test(consec[0].Description)) {
+        return 'blocked';
+      }
+    }
+    return consec;
+  }
   else { return 'no matches from longest phrase' };
 
 };

@@ -1,0 +1,1 @@
+module.exports.blocked = ['United', 'States', 'US', 'Us', 'American', 'America', 'Mexican', 'Mexico', 'New York Times', 'CNN' ];

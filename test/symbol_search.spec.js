@@ -40,6 +40,7 @@ describe('search algorithm', function () {
     expect(traded).to.deep.equal('');
   });
 });
+
 describe('search algorithm', function () {
   let traded = isTraded("Getting ready to leave for Melbourne, Florida. See you all soon!");
   it('should not find a ticker symbol', function() {
@@ -61,7 +62,7 @@ describe('search algorithm', function () {
 describe('search algorithm', function () {
   let traded = isTraded("The FAKE NEWS media (failing @nytimes, @NBCNews, @ABC, @CBS, @CNN) is not my enemy, it is the enemy of the American People!");
   it('should not find a ticker symbol', function() {
-    expect(traded).to.deep.equal('');
+    expect(traded).to.deep.equal('blocked');
   });
 });
 

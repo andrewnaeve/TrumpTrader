@@ -41,4 +41,4 @@ const isTraded = require('./functions').isTraded;
 //   isTraded(tweet);
 // })
 
-longestPhrase("Don't believe the main stream (fake news) media.The White House is running VERY WELL.  inherited a MESS and am in the process of fixing it.".trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," "))
+isTraded("The FAKE NEWS media (failing @nytimes, @NBCNews, @ABC, @CBS, @CNN) is not my enemy, it is the enemy of the American People!".trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," "))

@@ -11,9 +11,13 @@ exports.isTraded = function(tweet) {
 
   let tweets = tweet.trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
   let Symbol = longestPhrase(tweets);
+  
+  if (Symbol === 'blocked') {
+    return 'blocked'
+  };
 
   try {
-    return Symbol[0]["Symbol"];
+    return Symbol[0].Symbol;
   } catch(error) {
     return "Error 1";
   }
