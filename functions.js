@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 const sorted = require('./ticker_lists/sorted').sorted;
 const sentiment = require('sentiment');
 
@@ -9,7 +10,7 @@ const findSymbol = require('./algorithms').findSymbol;
 exports.isTraded = function(tweet) {
 
   let tweets = tweet.trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," ");
-  let Symbol = findSymbol(longestPhrase(tweets));
+  let Symbol = longestPhrase(tweets);
 
   try {
     return Symbol[0]["Symbol"];
@@ -30,10 +31,7 @@ exports.getSentiment = function(tweet) {
 
 exports.shouldTrade = function(tweet) {
 
-  let p1 = exports.getSentiment(tweet)
-  let p2 = exports.isTraded(tweet)
-
-  Promise.all([p1, p2]).then(values => {
+  Promise.all([exports.getSentiment(tweet), exports.isTraded(tweet)]).then(values => {
     let comparative = values[0].comparative;
     let symbol = values[1];
     console.log('Promise Values', comparative, symbol);

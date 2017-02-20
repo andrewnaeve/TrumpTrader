@@ -1,40 +1,47 @@
 const sorted = require('./ticker_lists/sorted').sorted;
-
-
+const relevance = .34;
+// set relevance to return matching phrases that are a certain percentage of the company description
+// what happens when word matches are of equal length?
+// maybe every time a word is matched, the ticker symbol could be added to it.
+// then if reduced, would best match be found? 
+// 
 module.exports.longestPhrase = function(twee) {
   
   let tweet = twee.split(' ');
-  let consec = [];
+  let consec = [{Longest: '', Symbol: '', Description: ''}];
+  let collect = [];
 
-  for(var k = 0; k < sorted.length; k++) {
-    let companyString = sorted[k]["Description"];
+ for(var k = 0; k < sorted.length; k++) {
+    let companyString = sorted[k].Description;
     for (var i=0; i < tweet.length; i++) {
-      if (companyString.includes(tweet[i]) && tweet[i][0] === tweet[i][0].toUpperCase()) {
+      let pat1 = new RegExp('\\b('+tweet[i]+')\\b');
+      if (pat1.test(companyString) && tweet[i][0] === tweet[i][0].toUpperCase()) {
         var t = tweet[i];
-        consec.push(t);
         for (var j=i+1; j < tweet.length-1; j++) {
-          if (companyString.includes(t + ' ' + tweet[j])) {
+          let pat2 = new RegExp('\\b('+tweet[i] + ' ' + tweet[j]+')\\b');
+          if (pat2.test(companyString)) {
             t += ' ' + tweet[j];
-            consec.push(t);
           } else {
             break;
+          };
+        };
+      
+        let matchObject = { Longest: t, Symbol: sorted[k].Symbol, Description: sorted[k].Description};
+
+        if(consec[0].Longest.length < t.length && (matchObject.Longest.split(' ').length / companyString.split(' ').length) > relevance) {
+          consec[0] = matchObject;
+        } else if (consec[0].Longest.length === t.length) {
+          if ((consec[0].Longest.split(' ').length / consec[0].Description.split(' ').length) < (matchObject.Longest.split(' ').length / matchObject.Description.split(' ').length)) {
+            consec[0] = matchObject;
           };
         };
       };
     };
   };
-  // console.log(consec)
-  if (consec.length > 0) {return(consec.reduce((a,b) => a.length > b.length ? a : b))}
+  
+  if (consec.length > 0) { return consec }
   else { return 'no matches from longest phrase' };
-};
-
- module.exports.findSymbol = function(longest) {
-
-  let wordCount = longest.split(' ').length;
-  let narrow = sorted.filter(x => x["Description"].includes(longest) && wordCount / x["Description"].split(' ').length > .3)
-  .sort((a,b) => (longest.length / b["Description"].length) - (longest.length / a["Description"].length))
-  
-  return narrow
 
 };
-  
+
+
