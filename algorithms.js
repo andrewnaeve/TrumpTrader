@@ -5,9 +5,9 @@ const relevance = .32;
 // possible overal character length more relevant than word chunks
 module.exports.longestPhrase = function(twee) {
   
+// this block finds the longest consecutive phrase from a tweet that is contained by a company description 
   let tweet = twee.split(' ');
   let consec = [{Longest: '', Symbol: '', Description: ''}];
-
  for(var k = 0; k < sorted.length; k++) {
     let companyString = sorted[k].Description;
     for (var i=0; i < tweet.length; i++) {
@@ -25,6 +25,7 @@ module.exports.longestPhrase = function(twee) {
       
         let matchObject = { Longest: t, Symbol: sorted[k].Symbol, Description: sorted[k].Description};
 
+// this block adds the more relevant match to consec, as measured by percentage of company name
         if(consec[0].Longest.length < t.length && (matchObject.Longest.length / companyString.length) > relevance) {
           consec[0] = matchObject;
         } else if (consec[0].Longest.length === t.length) {
@@ -35,18 +36,19 @@ module.exports.longestPhrase = function(twee) {
       };
     };
   };
-  
-  if (consec.length > 0) {
-    for(var d = 0; d < blocked.length; d++) {
-      let forbidden = new RegExp(blocked[d]);
-      if (forbidden.test(consec[0].Description)) {
-        return 'blocked';
-      }
-    }
-    return consec;
-  }
-  else { return 'no matches from longest phrase' };
+
+// this block checks against a word block list  
+  for(var d = 0; d < blocked.length; d++) {
+    let forbidden = new RegExp(blocked[d]);
+    if (forbidden.test(consec[0].Description)) {
+      return 'blocked';
+    };
+  };
+  return consec;
 
 };
+
+
+
 
 

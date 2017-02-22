@@ -32,6 +32,13 @@ describe('search algorithm', function () {
   });
 });
 
+describe('search algorithm', function () {
+  let traded = isTraded("Boycott all Apple products until such time as Apple gives cellphone info to authorities regarding radical Islamic terrorist couple from Cal.");
+  it('should find the correct stock symbol', function() {
+    expect(traded).to.deep.equal('AAPL');
+  });
+});
+
 // these should not find ticker symbols
 
 describe('search algorithm', function () {

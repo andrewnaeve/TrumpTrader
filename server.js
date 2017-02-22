@@ -20,12 +20,19 @@ const isTraded = require('./functions').isTraded;
 const express = require('express')
 const app = express();
 const port = 3000;
+
+const router = require('./router')
+
+router(app)
+
 app.use('/public', express.static('./public'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(express.static('./public'));
+
 
 app.listen(port, function() {
   console.log('listening on ' + port);
@@ -33,12 +40,14 @@ app.listen(port, function() {
 
 // // twitter stream grab
 let params = {with: 'followings'};
-let stream = client.stream('user', params );
+// let stream = client.stream('user', params );
 
-stream.on('data', function(event) {
-  let tweet = event.text;
-  console.log('the tweet: ', tweet);
-  isTraded(tweet);
-})
+// stream.on('data', function(event) {
+//   let tweet = event.text;
+//   console.log('the tweet: ', tweet);
+//   // isTraded(tweet);
+// })
 
-// isTraded("The FAKE NEWS media (failing @nytimes, @NBCNews, @ABC, @CBS, @CNN) is not my enemy, it is the enemy of the American People!".trim().replace(/[.,\/#!@$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s{2,}/g," "))
+
+
+
