@@ -6,6 +6,7 @@ const twitter = require('twitter');
 const client = require('./secrets/twitter_keys').twit;
 const et = require('./secrets/etrade').et;
 const sentiment = require('sentiment');
+const request = require('request');
 
 // stock lists
 const nasdaq = require('./ticker_lists/nasdaq').nasdaq;
@@ -22,12 +23,19 @@ const isTraded = require('./functions').isTraded;
 const express = require('express')
 const app = express();
 const port = 3000;
+
+const router = require('./router')
+
+router(app)
+
 app.use('/public', express.static('./public'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(express.static('./public'));
+
 
 app.listen(port, function() {
   console.log('listening on ' + port);
@@ -35,12 +43,12 @@ app.listen(port, function() {
 
 // // twitter stream grab
 let params = {with: 'followings'};
-let stream = client.stream('user', params );
+// let stream = client.stream('user', params );
 
 // stream.on('data', function(event) {
 //   let tweet = event.text;
 //   console.log('the tweet: ', tweet);
-//   isTraded(tweet);
+//   // isTraded(tweet);
 // })
 
 // et.getRequestToken(
@@ -57,3 +65,4 @@ let stream = client.stream('user', params );
 // }, function(error) {
 //   console.log(error)
 // });
+
