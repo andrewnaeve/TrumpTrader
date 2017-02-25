@@ -5,9 +5,7 @@ const logger = require('morgan');
 const twitter = require('twitter');
 const client = require('./secrets/twitter_keys').twit;
 const et = require('./secrets/etrade').et;
-const {key, secret} = require('./secrets/etrade').et;
 const sentiment = require('sentiment');
-
 
 // stock lists
 const nasdaq = require('./ticker_lists/nasdaq').nasdaq;
