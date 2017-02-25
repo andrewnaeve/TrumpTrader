@@ -4,6 +4,7 @@ const logger = require('morgan');
 const twitter = require('twitter');
 const client = require('./secrets/twitter_keys').twit;
 const sentiment = require('sentiment');
+const request = require('request');
 
 // stock lists
 const nasdaq = require('./ticker_lists/nasdaq').nasdaq;
@@ -48,6 +49,14 @@ let params = {with: 'followings'};
 //   // isTraded(tweet);
 // })
 
+// let options = {
+// Authorization: OAuth realm="",
+// oauth_callback="oob",oauth_signature="FjoSQaFDKEDK1FJazlY3xArNflk%3D", 
+// oauth_nonce="LTg2ODUzOTQ5MTEzMTY3MzQwMzE%3D",
+// oauth_signature_method="HMAC-SHA1",
+// oauth_consumer_key="282683cc9e4b8fc81dea6bc687d46758",
+// moauth_timestamp="1273254425"
+// }
 
 
 
