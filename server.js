@@ -27,7 +27,7 @@ const router = require('./router')
 
 router(app)
 
-app.use('/public', express.static('./public'));
+app.use('./public', express.static('./public'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -47,21 +47,29 @@ let params = {with: 'followings'};
 // stream.on('data', function(event) {
 //   let tweet = event.text;
 //   console.log('the tweet: ', tweet);
-//   // isTraded(tweet);
+//   shouldTrade(tweet);
 // })
 
-// et.getRequestToken(
-//   function(authorizationUrl) {
-//     console.log(authorizationUrl)
-//   }, function(error) {
-//     console.log('error ', error)
-//   }
-// );
 
-// et.getAccessToken('J7CXG',
-// function() {
+  // function getR() {
+  //   et.getRequestToken(
+  //   function(authorizationUrl) {
+  //     console.log(authorizationUrl)
 
-// }, function(error) {
-//   console.log(error)
-// });
+  //   }, function(error) {
+  //     console.log('error ', error)
+  //   })
+  // }
 
+// getR()
+
+
+
+
+
+  // et.getAccessToken(key,
+  // function() {
+  //   console.log('access granted')
+  // }, function(error) {
+  //   console.log(error)
+  // )

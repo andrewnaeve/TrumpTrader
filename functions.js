@@ -1,11 +1,9 @@
 const Promise = require('bluebird');
 const sorted = require('./ticker_lists/sorted').sorted;
 const sentiment = require('sentiment');
-
+// const et = require('./secrets/etrade').et;
 const longestPhrase = require('./algorithms').longestPhrase;
 const findSymbol = require('./algorithms').findSymbol;
-
-
 
 exports.isTraded = function(tweet) {
 
@@ -34,7 +32,6 @@ exports.getSentiment = function(tweet) {
 },
 
 exports.shouldTrade = function(tweet) {
-
   Promise.all([exports.getSentiment(tweet), exports.isTraded(tweet)]).then(values => {
     let comparative = values[0].comparative;
     let symbol = values[1];
@@ -45,8 +42,6 @@ exports.shouldTrade = function(tweet) {
   });
 },
 
-exports.makeTrade = function(symbol) {
-  console.log('hi');
+exports.hi = function () {
+  console.log('hi')
 }
-
-

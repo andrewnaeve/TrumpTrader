@@ -22,7 +22,7 @@ module.exports.longestPhrase = function(twee) {
             break;
           };
         };
-      
+        let relevance = (t.split(" ").length / stockList[k].Description.split(" ").length);
         let matchObject = { Longest: t, Symbol: sorted[k].Symbol, Description: sorted[k].Description};
 
 // this block adds the more relevant match to consec, as measured by percentage of company name
