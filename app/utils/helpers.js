@@ -1,4 +1,4 @@
-const et = require('../../secrets/etrade').et;
+const et = require('etrade')
 
 let helpers = {
   getRequest: function() {
